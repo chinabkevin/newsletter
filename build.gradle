@@ -36,6 +36,7 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     runtimeOnly("com.h2database:h2")
+    implementation("com.amirkhawaja:ksuid:1.0.0")
 
 
 }

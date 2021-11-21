@@ -12,13 +12,15 @@ import io.micronaut.http.client.BlockingHttpClient
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
+import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification
 import spock.lang.Unroll
 
 import javax.validation.constraints.NotNull
 
-@Property(name ="spec.name", value = "SubscriberSaveServiceSpec")
+@Property(name = "spec.name", value = "SubscriberSaveControllerSpec")
+@MicronautTest
 class SubscriberSaveControllerSpec extends Specification {
 
     @Inject
@@ -33,7 +35,7 @@ class SubscriberSaveControllerSpec extends Specification {
         BlockingHttpClient client = httpClient.toBlocking()
 
         when:
-        client.exchange(HttpRequest.POST("/api/v1/subscriber", {}))
+        client.exchange(HttpRequest.POST("/api/v1/subscriber", '{}'))
 
         then:
         HttpClientResponseException e = thrown()
@@ -42,9 +44,22 @@ class SubscriberSaveControllerSpec extends Specification {
         'application/problem+json' == e.response.contentType.get().toString()
     }
 
+    void "for happy path a POST request to /api/v1/subscriber delegates to SubscriberSaveService::save"() {
+        given:
+        BlockingHttpClient client = httpClient.toBlocking()
 
-    @Unroll("POST /api/v1/subscriber with invalid email #email")
-    void "subscriber with invaild email return 400"(String email){
+        when:
+        client.exchange(HttpRequest.POST('/api/v1/subscriber', [email: 'tcook@apple.com']))
+
+        then:
+        noExceptionThrown()
+        subscriberSaveService instanceof SubscriberSaveServiceReplacement
+        1 == ((SubscriberSaveServiceReplacement) subscriberSaveService).invocations
+    }
+
+
+    @Unroll("POST /api/v1/subscriber with invalid email #email returns 400")
+    void "subscriber with invalid email returns 400"(String email){
         given:
         BlockingHttpClient client = httpClient.toBlocking()
 
@@ -62,23 +77,6 @@ class SubscriberSaveControllerSpec extends Specification {
     }
 
 
-    void "for happy path a POST request to /api/v1/subscriber delegates to SubscriberSaveService"(){
-        given:
-        BlockingHttpClient client = httpClient.toBlocking()
-
-        when:
-        client.exchange(HttpRequest.POST("/api/v1/subscriber", Collections.singletonMap("email", 'tcook@apple.com')))
-
-        then:
-        noExceptionThrown()
-        subscriberSaveService instanceof  SubscriberSaveServiceReplacement
-
-       1== ((SubscriberSaveServiceReplacement) subscriberSaveService).invocations
-
-
-    }
-
-
     @Requires(property ="spec.name", value = "SubscriberSaveServiceSpec")
     @Replaces(SubscriberSaveService)
     @Singleton
@@ -86,8 +84,10 @@ class SubscriberSaveControllerSpec extends Specification {
 
         int invocations
         @Override
-        void save(@NonNull @NotNull Subscriber subscribe) {
-
+        @NonNull
+        Optional<String> save(@NonNull @NotNull Subscriber subscribe) {
+            invocations++
+            Optional.empty()
         }
     }
 }
