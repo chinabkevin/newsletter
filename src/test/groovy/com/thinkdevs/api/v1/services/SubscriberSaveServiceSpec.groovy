@@ -10,6 +10,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import javax.validation.ConstraintViolationException
+import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 @MicronautTest(startApplication = false)
@@ -40,15 +41,14 @@ class SubscriberSaveServiceSpec extends Specification {
         email << ['',null,'tcook']
     }
 
-    @Requires(property ="spec.name", value = "SubscriberSaveServiceSpec")
+    @Requires(property = "spec.name", value = "SubscriberSaveServiceSpec")
     @Replaces(SubscriberSaveService)
     @Singleton
-    static class SubscriberSaveServiceReplacement implements SubscriberSaveService{
+    static class SubscriberSaveServiceReplacement implements SubscriberSaveService {
 
         @Override
         @NonNull
-        Optional<String> save(@NonNull @NotNull Subscriber subscribe) {
-
+        Optional<String> save(@NonNull @NotNull @Valid Subscriber subscriber) {
             Optional.empty()
         }
     }
