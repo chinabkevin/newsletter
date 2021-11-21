@@ -1,4 +1,4 @@
-package com.example;
+package com.thinkdevs;
 
 import io.micronaut.runtime.Micronaut;
 
