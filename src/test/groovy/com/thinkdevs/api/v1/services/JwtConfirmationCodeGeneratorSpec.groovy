@@ -26,7 +26,7 @@ class JwtConfirmationCodeGeneratorSpec extends Specification {
         jwt instanceof SignedJWT
         "tcook@apple.com" ==((SignedJWT) jwt).getJWTClaimsSet().getClaim("email")
 
-        when:
+        then:
         codeVerifier.verify(jwtString.get())
 
     }
