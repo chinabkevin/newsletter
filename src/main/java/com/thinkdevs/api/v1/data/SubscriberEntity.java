@@ -2,10 +2,8 @@ package com.thinkdevs.api.v1.data;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
-import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
-import io.micronaut.data.annotation.MappedProperty;
 
 import javax.validation.constraints.NotBlank;
 
@@ -24,19 +22,25 @@ public class SubscriberEntity {
     private final String name;
 
     private final boolean confirmed;
+
+    private final boolean unsubscribed;
+
     public SubscriberEntity(@NonNull String id,
                             @NonNull String email,
-                            @Nullable String name){
-        this(id, email, name, false);
+                            @Nullable String name
+                            ){
+        this(id, email, name, false,false);
     }
     public SubscriberEntity(@NonNull String id,
                             @NonNull String email,
                             @Nullable String name,
-                            boolean confirmed) {
+                            boolean confirmed,
+                            boolean unsubscribed) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.confirmed = confirmed;
+        this.unsubscribed = unsubscribed;
     }
 
     @NonNull
@@ -56,5 +60,9 @@ public class SubscriberEntity {
 
     public boolean isConfirmed() {
         return confirmed;
+    }
+
+    public boolean isUnsubscribed() {
+        return unsubscribed;
     }
 }

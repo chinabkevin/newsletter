@@ -10,4 +10,6 @@ public interface SubscriberDataRepository extends CrudRepository<SubscriberEntit
 
     @NonNull
     Integer countByConfirmed(boolean confirmed);
+
+    Integer countByConfirmedAndUnsubscribed(boolean confirmed, boolean unsubscribed);
 }
