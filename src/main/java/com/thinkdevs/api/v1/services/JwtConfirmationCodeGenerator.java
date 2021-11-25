@@ -9,8 +9,11 @@ import io.micronaut.security.token.jwt.signature.SignatureConfiguration;
 import io.micronaut.security.token.jwt.validator.ExpirationJwtClaimsValidator;
 import io.micronaut.security.token.jwt.validator.JwtValidator;
 import jakarta.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.constraints.NotBlank;
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -21,6 +24,7 @@ public class JwtConfirmationCodeGenerator implements ConfirmationCodeGenerator, 
     public static final String EMAIL_CLAIM = "email";
     private final TokenGenerator tokenGenerator;
     private final JwtValidator jwtValidator;
+    private static final Logger LOG = LoggerFactory.getLogger(JwtConfirmationCodeGenerator.class);
 
     public JwtConfirmationCodeGenerator(TokenGenerator tokenGenerator,
                                         Collection<SignatureConfiguration> signatureConfigurations,
@@ -36,9 +40,26 @@ public class JwtConfirmationCodeGenerator implements ConfirmationCodeGenerator, 
     }
 
     @Override
-    public boolean verify(@NonNull @NotBlank String token) {
+    @NonNull
+    public Optional<String> verify(@NonNull @NotBlank String token) {
         Optional<JWT> validate = jwtValidator.validate(token, null);
-        return validate.isPresent();
+        if (validate.isPresent()) {
+            return Optional.empty();
+        }
+        JWT jwt = validate.get();
+        try {
+            Object claim = jwt.getJWTClaimsSet().getClaim(EMAIL_CLAIM);
+            if (claim == null){
+                return Optional.empty();
+            }
+            return Optional.of(claim.toString());
+        } catch (ParseException e) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Could not get the claims", e);
+            }
+        }
+        return Optional.empty();
+
     }
 
     @Override

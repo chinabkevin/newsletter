@@ -39,3 +39,14 @@
 - [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
 
 -[KSUID Java library ](https://github.com/akhawaja/ksuid)
+
+## Feature http-client documentation
+
+- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+
+## Feature views-thymeleaf documentation
+
+- [Micronaut Thymeleaf Views documentation](https://micronaut-projects.github.io/micronaut-views/latest/guide/index.html#thymeleaf)
+
+- [https://www.thymeleaf.org/](https://www.thymeleaf.org/)
+
