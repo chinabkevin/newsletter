@@ -36,20 +36,20 @@ public class JwtConfirmationCodeGenerator implements ConfirmationCodeGenerator, 
                 .withEncryptions(encryptionConfigurations)
                 .withClaimValidators(Collections.singleton(expirationJwtClaimsValidator))
                 .build();
-
     }
 
     @Override
     @NonNull
     public Optional<String> verify(@NonNull @NotBlank String token) {
-        Optional<JWT> validate = jwtValidator.validate(token, null);
-        if (validate.isPresent()) {
+        Optional<JWT> optionalJWT = jwtValidator.validate(token, null);
+        if (!optionalJWT.isPresent()) {
             return Optional.empty();
         }
-        JWT jwt = validate.get();
+        JWT jwt = optionalJWT.get();
+
         try {
             Object claim = jwt.getJWTClaimsSet().getClaim(EMAIL_CLAIM);
-            if (claim == null){
+            if (claim == null) {
                 return Optional.empty();
             }
             return Optional.of(claim.toString());

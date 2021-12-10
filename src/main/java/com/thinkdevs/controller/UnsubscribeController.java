@@ -43,7 +43,7 @@ public class UnsubscribeController {
             }
         }
         Optional<String> emailOptional = confirmationCodeVerifier.verify(token);
-        if (!emailOptional.isPresent()){
+        if (!emailOptional.isEmpty()){
            return notFound();
 
         }

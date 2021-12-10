@@ -28,22 +28,23 @@ class UnsubscribeControllerSpec extends Specification {
     @Inject
     ConfirmationCodeGenerator confirmationCodeGenerator;
 
-    BlockingHttpClient getClient(){
-        if (_client == null){
+    BlockingHttpClient getClient() {
+        if (_client == null) {
             _client = httpClient.toBlocking()
         }
+        _client
     }
 
-    void "Get /unsubscribe token query value parameters is required"(){
+    void "GET /unsubscribe token query value parameters is required"() {
         when: 'not token is supplied'
         String html = client.retrieve(createRequest(), String)
 
-        then: 'app redirect to the 404'
+        then: 'app redirect to the page 404'
         noExceptionThrown()
         html.contains('<h1>Not Found</h1>')
     }
 
-    void "Get /unsubscribe if invalid token the user to 404"(){
+    void "GET /unsubscribe if invalid token redirect the user to 404"() {
         when: 'not token is supplied'
         String html = client.retrieve(createRequest("foo"), String)
 
@@ -52,23 +53,24 @@ class UnsubscribeControllerSpec extends Specification {
         html.contains('<h1>Not Found</h1>')
     }
 
-    void "Get /unsubscribe token renders a Html Page telling the user unsuscription "(){
+    void "GET /unsubscribe token renders a Html Page telling the user unsubscription was successful "() {
         when: 'not token is supplied'
-        var token =confirmationCodeGenerator.generate("tcook@apple.com")
+        var token = confirmationCodeGenerator.generate("tcook@apple.com")
+        println("token ----- {} ", token.get())
 
         then:
         token.isPresent()
 
         String html = client.retrieve(createRequest(token.get()), String)
 
-        then: 'app show a happy path'
+        then: 'app shows a happy path'
         noExceptionThrown()
         html.contains('<h1>You are no longer subscribed</h1>')
     }
 
-    private static HttpRequest<?> createRequest(@Nullable String token){
-        UriBuilder builder =UriBuilder.of('/unsubscribe')
-        if (token){
+    private static HttpRequest<?> createRequest(@Nullable String token) {
+        UriBuilder builder = UriBuilder.of('/unsubscribe')
+        if (token) {
             builder.queryParam("token", token = null)
         }
         HttpRequest.GET(builder.build())
