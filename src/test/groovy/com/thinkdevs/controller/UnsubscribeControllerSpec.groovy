@@ -56,7 +56,6 @@ class UnsubscribeControllerSpec extends Specification {
     void "GET /unsubscribe token renders a Html Page telling the user unsubscription was successful "() {
         when: 'not token is supplied'
         var token = confirmationCodeGenerator.generate("tcook@apple.com")
-        println("token ----- {} ", token.get())
 
         then:
         token.isPresent()

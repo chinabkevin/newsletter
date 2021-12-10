@@ -43,19 +43,35 @@ class SubscriberCountControllerSpec extends Specification {
 
         when:
         String id = idGenerator.generate().get()
-        dataRepository.save(new SubscriberEntity("id",
+        dataRepository.save(new SubscriberEntity(id,
                 "tcook@apple.com",
                 "Tim cook",
-                true))
+                true,
+        false))
         result = client.retrieve(request, Integer)
-
 
         then:
         noExceptionThrown()
         1 == result
 
+
+        when:
+        String federighId = idGenerator.generate().get()
+        dataRepository.save(new SubscriberEntity(federighId,
+                "cfederigh@apple.com",
+                "Craig federighId",
+                true,
+                true))
+        result = client.retrieve(request, Integer)
+
+        then:
+        noExceptionThrown()
+        1 == result
+
+
         cleanup:
-        dataRepository.deleteById("id")
+        dataRepository.deleteById(id)
+        dataRepository.deleteById(federighId)
 
     }
 
