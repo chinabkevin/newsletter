@@ -1,4 +1,4 @@
-package com.thinkdevs.api.v1.services;
+package com.thinkdevs.services;
 
 import com.thinkdevs.Subscriber;
 import io.micronaut.core.annotation.NonNull;

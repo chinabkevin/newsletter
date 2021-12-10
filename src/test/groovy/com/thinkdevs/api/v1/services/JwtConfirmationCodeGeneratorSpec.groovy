@@ -3,6 +3,8 @@ package com.thinkdevs.api.v1.services
 import com.nimbusds.jwt.JWT
 import com.nimbusds.jwt.JWTParser
 import com.nimbusds.jwt.SignedJWT
+import com.thinkdevs.services.ConfirmationCodeVerifier
+import com.thinkdevs.services.JwtConfirmationCodeGenerator
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification

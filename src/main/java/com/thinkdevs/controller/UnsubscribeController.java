@@ -1,7 +1,7 @@
 package com.thinkdevs.controller;
 
-import com.thinkdevs.api.v1.services.ConfirmationCodeVerifier;
-import com.thinkdevs.api.v1.services.UnsubscribeService;
+import com.thinkdevs.services.ConfirmationCodeVerifier;
+import com.thinkdevs.services.UnsubscribeService;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;

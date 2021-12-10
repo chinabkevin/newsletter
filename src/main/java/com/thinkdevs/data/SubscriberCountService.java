@@ -1,4 +1,4 @@
-package com.thinkdevs.api.v1.data;
+package com.thinkdevs.data;
 
 import io.micronaut.core.annotation.NonNull;
 

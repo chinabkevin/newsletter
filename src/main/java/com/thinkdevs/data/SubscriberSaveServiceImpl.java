@@ -1,8 +1,8 @@
-package com.thinkdevs.api.v1.data;
+package com.thinkdevs.data;
 
 import com.thinkdevs.Subscriber;
-import com.thinkdevs.api.v1.services.IdGenerator;
-import com.thinkdevs.api.v1.services.SubscriberSaveService;
+import com.thinkdevs.services.IdGenerator;
+import com.thinkdevs.services.SubscriberSaveService;
 import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 

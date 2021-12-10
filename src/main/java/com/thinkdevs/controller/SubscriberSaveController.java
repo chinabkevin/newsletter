@@ -1,7 +1,7 @@
-package com.thinkdevs.api.v1;
+package com.thinkdevs.controller;
 
 import com.thinkdevs.Subscriber;
-import com.thinkdevs.api.v1.services.SubscriberSaveService;
+import com.thinkdevs.services.SubscriberSaveService;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;

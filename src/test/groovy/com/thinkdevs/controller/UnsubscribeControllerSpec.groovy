@@ -1,10 +1,8 @@
 package com.thinkdevs.controller
 
-import com.thinkdevs.api.v1.services.ConfirmationCodeGenerator
-import com.thinkdevs.api.v1.services.ConfirmationCodeVerifier
+import com.thinkdevs.services.ConfirmationCodeGenerator
 import io.micronaut.core.annotation.Nullable
 import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.client.BlockingHttpClient
 import io.micronaut.http.client.HttpClient

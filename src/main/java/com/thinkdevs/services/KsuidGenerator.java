@@ -1,4 +1,4 @@
-package com.thinkdevs.api.v1.services;
+package com.thinkdevs.services;
 
 import com.amirkhawaja.Ksuid;
 import jakarta.inject.Singleton;

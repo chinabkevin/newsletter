@@ -1,5 +1,6 @@
-package com.thinkdevs.api.v1.data;
+package com.thinkdevs.data;
 
+import com.thinkdevs.model.SubscriptionStatus;
 import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 
@@ -15,6 +16,6 @@ public class SubscriberCountServiceImpl implements SubscriberCountService {
     @Override
     @NonNull
     public Integer countSubscribers() {
-        return subscriberDataRepository.countByConfirmedAndUnsubscribed(true, false);
+        return subscriberDataRepository.countByConfirmedAndUnsubscribed(SubscriptionStatus.CANCELED);
     }
 }

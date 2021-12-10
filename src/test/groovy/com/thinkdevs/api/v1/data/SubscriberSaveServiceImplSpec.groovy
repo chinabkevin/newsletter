@@ -1,6 +1,8 @@
 package com.thinkdevs.api.v1.data
 
 import com.thinkdevs.Subscriber
+import com.thinkdevs.data.SubscriberDataRepository
+import com.thinkdevs.data.SubscriberSaveServiceImpl
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import spock.lang.Specification

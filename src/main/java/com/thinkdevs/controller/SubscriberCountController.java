@@ -1,6 +1,6 @@
-package com.thinkdevs.api.v1;
+package com.thinkdevs.controller;
 
-import com.thinkdevs.api.v1.data.SubscriberCountService;
+import com.thinkdevs.data.SubscriberCountService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;

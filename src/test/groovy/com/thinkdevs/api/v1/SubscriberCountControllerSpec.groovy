@@ -1,11 +1,10 @@
 package com.thinkdevs.api.v1
 
-import com.thinkdevs.Subscriber
-import com.thinkdevs.api.v1.data.SubscriberDataRepository
-import com.thinkdevs.api.v1.data.SubscriberEntity
-import com.thinkdevs.api.v1.services.IdGenerator
-import io.micronaut.core.annotation.NonNull
-import io.micronaut.core.annotation.Nullable
+
+import com.thinkdevs.data.SubscriberDataRepository
+import com.thinkdevs.data.SubscriberEntity
+import com.thinkdevs.model.SubscriptionStatus
+import com.thinkdevs.services.IdGenerator
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.MediaType
 import io.micronaut.http.client.BlockingHttpClient
@@ -46,8 +45,7 @@ class SubscriberCountControllerSpec extends Specification {
         dataRepository.save(new SubscriberEntity(id,
                 "tcook@apple.com",
                 "Tim cook",
-                true,
-        false))
+                SubscriptionStatus.ACTIVE))
         result = client.retrieve(request, Integer)
 
         then:
@@ -60,8 +58,7 @@ class SubscriberCountControllerSpec extends Specification {
         dataRepository.save(new SubscriberEntity(federighId,
                 "cfederigh@apple.com",
                 "Craig federighId",
-                true,
-                true))
+                SubscriptionStatus.CANCELED))
         result = client.retrieve(request, Integer)
 
         then:

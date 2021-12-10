@@ -1,7 +1,6 @@
-package com.thinkdevs.api.v1;
+package com.thinkdevs.controller;
 
-import com.thinkdevs.api.v1.services.ConfirmationCodeVerifier;
-import io.micronaut.core.annotation.NonNull;
+import com.thinkdevs.services.ConfirmationCodeVerifier;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;

@@ -1,4 +1,4 @@
-package com.thinkdevs.api.v1.services;
+package com.thinkdevs.services;
 
 import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;

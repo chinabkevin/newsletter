@@ -1,5 +1,6 @@
-package com.thinkdevs.api.v1.data;
+package com.thinkdevs.data;
 
+import com.thinkdevs.model.SubscriptionStatus;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.data.annotation.Id;
@@ -21,26 +22,22 @@ public class SubscriberEntity {
     @Nullable
     private final String name;
 
-    private final boolean confirmed;
-
-    private final boolean unsubscribed;
+    private final SubscriptionStatus subscriptionStatus;
 
     public SubscriberEntity(@NonNull String id,
                             @NonNull String email,
                             @Nullable String name
                             ){
-        this(id, email, name, false,false);
+        this(id, email, name,SubscriptionStatus.PENDING);
     }
     public SubscriberEntity(@NonNull String id,
                             @NonNull String email,
                             @Nullable String name,
-                            boolean confirmed,
-                            boolean unsubscribed) {
+                            SubscriptionStatus subscriptionStatus) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.confirmed = confirmed;
-        this.unsubscribed = unsubscribed;
+        this.subscriptionStatus = subscriptionStatus;
     }
 
     @NonNull
@@ -58,11 +55,7 @@ public class SubscriberEntity {
         return name;
     }
 
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public boolean isUnsubscribed() {
-        return unsubscribed;
+    public SubscriptionStatus getSubscriptionStatus() {
+        return subscriptionStatus;
     }
 }

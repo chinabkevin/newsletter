@@ -1,6 +1,7 @@
 package com.thinkdevs.api.v1.services
 
 import com.thinkdevs.Subscriber
+import com.thinkdevs.services.SubscriberSaveService
 import io.micronaut.context.annotation.Replaces
 import io.micronaut.context.annotation.Requires
 import io.micronaut.core.annotation.NonNull
